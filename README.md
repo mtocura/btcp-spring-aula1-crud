@@ -8,13 +8,13 @@ O sistema armazena o modelo, a marca e o ano de um carro em um Map que simula um
 
 O sistema roda na porta 8080
 
-- GET (/aula1/tt/car)
+- GET ````(/aula1/tt/car)````
   - retorna uma lista com todos os carros
 
-- GET (/aula1/tt/car/{id})
+- GET ````(/aula1/tt/car/{id})````
   - retorna um carro a partir de seu id
 
-- POST (/aula1/tt/car)
+- POST ````(/aula1/tt/car)````
   - Adiciona um carro ao "banco de dados"
   - Body request
   ````
@@ -25,7 +25,7 @@ O sistema roda na porta 8080
   }
   ````
   
-- PUT (/aula1/tt/car/{id})
+- PUT ````(/aula1/tt/car/{id})````
   - Altera um carro já existente no "banco" através do seu id
   - Body request
   ````
@@ -36,5 +36,5 @@ O sistema roda na porta 8080
   }
   ````
   
-- DELETE (/aula1/tt/car/{id})
+- DELETE ````(/aula1/tt/car/{id})````
   - remove um carro a partir do seu id e o retorna

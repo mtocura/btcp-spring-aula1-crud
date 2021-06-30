@@ -33,7 +33,7 @@ public class CarController {
     }
 
     @DeleteMapping("/car/{id}")
-    public Car deleteCarById(long id) {
+    public Car deleteCarById(@PathVariable long id) {
         return carRepository.deleteById(id);
     }
 }

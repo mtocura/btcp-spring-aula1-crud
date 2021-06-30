@@ -6,7 +6,7 @@ import java.util.*;
 
 public class CarRepository {
     private static Map<Long, Car> db = new HashMap<>();
-    private static Long id = 0l;
+    private static Long id = 1l;
 
     public static List<Car> findAll() {
         List<Car> res = new ArrayList<>();
@@ -27,12 +27,14 @@ public class CarRepository {
     }
 
     public static void add(Car car) {
+        car.setId(id);
         db.put(id, car);
         id++;
     }
 
     public static void update(Long id, Car car) {
         if(db.containsKey(id)) {
+            car.setId(id);
             db.put(id, car);
         }
     }

@@ -26,17 +26,21 @@ public class CarRepository {
         }
     }
 
-    public static void add(Car car) {
+    public static Car add(Car car) {
         car.setId(id);
         db.put(id, car);
         id++;
+
+        return db.get(id - 1);
     }
 
-    public static void update(Long id, Car car) {
+    public static Car update(Long id, Car car) {
         if(db.containsKey(id)) {
             car.setId(id);
             db.put(id, car);
+            return db.get(id);
         }
+        return null;
     }
 
     public static Car deleteById(Long id) {

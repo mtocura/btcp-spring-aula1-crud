@@ -2,6 +2,8 @@ package br.com.aula1.tt.staticcrud.controller;
 
 import br.com.aula1.tt.staticcrud.model.Car;
 import br.com.aula1.tt.staticcrud.repository.CarRepository;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -13,27 +15,45 @@ public class CarController {
     private CarRepository carRepository = new CarRepository();
 
     @GetMapping("/car")
-    public List<Car> getAllCars() {
-        return carRepository.findAll();
+    public ResponseEntity<?> getAllCars() {
+        return ResponseEntity.ok(carRepository.findAll());
     }
 
     @GetMapping("/car/{id}")
-    public Car getCarById(@PathVariable long id) {
-        return carRepository.findById(id);
+    public ResponseEntity<?> getCarById(@PathVariable long id) {
+        Car res = carRepository.findById(id);
+
+        if(res != null) {
+            return ResponseEntity.ok(res);
+        } else {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Carro não encontrado.");
+        }
     }
 
     @PostMapping("/car")
-    public void createCar(@RequestBody Car car) {
-        carRepository.add(car);
+    public ResponseEntity<?> createCar(@RequestBody Car car) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(carRepository.add(car));
     }
 
     @PutMapping("/car/{id}")
-    public void updateCar(@PathVariable long id, @RequestBody Car car) {
-        carRepository.update(id, car);
+    public ResponseEntity<?> updateCar(@PathVariable long id, @RequestBody Car car) {
+        Car res = carRepository.update(id, car);
+
+        if(res != null) {
+            return ResponseEntity.ok(res);
+        } else {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Carro não encontrado.");
+        }
     }
 
     @DeleteMapping("/car/{id}")
-    public Car deleteCarById(@PathVariable long id) {
-        return carRepository.deleteById(id);
+    public ResponseEntity<?> deleteCarById(@PathVariable long id) {
+        Car res = carRepository.deleteById(id);
+
+        if(res != null) {
+            return ResponseEntity.ok(res);
+        } else {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Carro não encontrado.");
+        }
     }
 }

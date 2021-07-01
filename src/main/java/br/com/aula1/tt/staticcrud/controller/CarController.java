@@ -5,7 +5,9 @@ import br.com.aula1.tt.staticcrud.repository.CarRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
 
+import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -31,8 +33,10 @@ public class CarController {
     }
 
     @PostMapping("/car")
-    public ResponseEntity<?> createCar(@RequestBody Car car) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(carRepository.add(car));
+    public ResponseEntity<?> createCar(@RequestBody Car car, UriComponentsBuilder uriBuilder) {
+        Car addedCar = carRepository.add(car);
+        URI uri = uriBuilder.path("/aula1/tt/car/{id}").buildAndExpand(addedCar.getId()).toUri();
+        return ResponseEntity.created(uri).build();
     }
 
     @PutMapping("/car/{id}")
